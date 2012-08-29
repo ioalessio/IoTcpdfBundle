@@ -14,12 +14,6 @@
 			"email": "gergely@polonkai.eu"
 		}
 	],
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/w00d5t0ck"
-		}
-	],
 	"require": {
 		"php": ">=5.3.0",
 		"symfony/framework-bundle": "2.1.*",
