@@ -1,6 +1,6 @@
 How to Install
 ==============
-  1. Download TCPDF library at http://sourceforge.net/projects/tcpdf/files/
+  1. Only for vendor mode, download TCPDF library at http://sourceforge.net/projects/tcpdf/files/
       and put it in vendor folder
 
   2. Add this bundle to your vendor/ dir
@@ -16,9 +16,16 @@ How to Install
 
         ./bin/vendors install
 
-
+   * Composer mode
+     Add in composer.json 
+    
+     "require": {
+         "gergelypolonkai/tcpdfbundle": "dev-master",
+          ....
+     }
+     
   3. Add the "Io" namespace to your autoloader:
-
+    * Only for Vendor Mode
         // app/autoload.php
         $loader->registerNamespaces(array(
         'Io' => __DIR__.'/../vendor/bundles',
@@ -27,7 +34,6 @@ How to Install
 
         //in same file include tcpdf library
         require_once __DIR__.'/../vendor/tcpdf/tcpdf.php';
-
 
   4. Add the "Io" namespace to your kernel:
 
