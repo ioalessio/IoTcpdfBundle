@@ -1,15 +1,15 @@
 <?php
 /**
-* TCPDF Bridge 
+* TCPDF Bridge
 *
 * @author ioalessio
 */
 namespace Io\TcpdfBundle\Helper;
 use Symfony\Component\HttpFoundation\Response;
 
-class Tcpdf extends \TCPDF{
-
-    public function init()
+class Tcpdf extends \TCPDF
+{
+    public function init(array $options = array())
     {
         // set document information
         $this->SetCreator(PDF_CREATOR);
@@ -19,7 +19,7 @@ class Tcpdf extends \TCPDF{
         $this->SetKeywords('TCPDF, PDF, example, test, guide');
 
         // set default header data
-        $this->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING);
+        $this->SetHeaderData(isset($options['logo']) ? $options['logo'] : '', PDF_HEADER_LOGO_WIDTH, isset($options['title']) ? $options['title'] : '', isset($options['subtitle']) ? $options['subtitle'] : '');
 
         // set header and footer fonts
         $this->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -57,9 +57,9 @@ class Tcpdf extends \TCPDF{
     }
     /**
      */
-    public function quick_pdf($html, $file = "html.pdf", $format = "S")
+    public function quick_pdf($html, $file = "html.pdf", $format = "S", array $options = array())
     {
-      $this->init();
+        $this->init($options);
 
         // Close and output PDF document
         // This method has several options, check the source code documentation for more information.
@@ -67,6 +67,7 @@ class Tcpdf extends \TCPDF{
 
         $response =  new Response($this->Output($file, $format));
         $response->headers->set('Content-Type', 'application/pdf');
+
         return $response;
 
     }

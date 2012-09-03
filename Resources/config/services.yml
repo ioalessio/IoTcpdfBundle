@@ -1,5 +1,13 @@
 services:
   io_tcpdf:
+    class:  Io\TcpdfBundle\Helper\Configuration
+    arguments:
+      - @service_container
+    calls:
+      - [ setHelper, [ @io_tcpdf_helper ] ]
+
+  io_tcpdf_helper:
+    public: false
     class:  Io\TcpdfBundle\Helper\Tcpdf
     arguments:
       orientation: P

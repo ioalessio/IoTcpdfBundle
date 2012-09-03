@@ -28,7 +28,6 @@ class IoTcpdfExtension extends Extension
         // this line is the key
         $this->bindParameter($container, 'io_tcpdf', $config);
 
-
 //        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
@@ -37,22 +36,18 @@ class IoTcpdfExtension extends Extension
      /**
      * Set the given parameters to the given container
      * @param ContainerBuilder $container
-     * @param string $name
-     * @param mixed $value
+     * @param string           $name
+     * @param mixed            $value
      */
     private function bindParameter(ContainerBuilder $container, $name, $value)
     {
-        if( is_array($value) )
-        {
+        if ( is_array($value) ) {
 
-            foreach( $value as $index => $val )
-            {
+            foreach ($value as $index => $val) {
                 $this->bindParameter($container, $name.'.'.$index, $val);
             }
             $container->setParameter($name, $value);
-        }
-        else
-        {
+        } else {
             $container->setParameter($name, $value);
         }
     }

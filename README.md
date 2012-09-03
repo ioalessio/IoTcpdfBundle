@@ -59,6 +59,13 @@ HOW TO USE:
 
                 //io_tcpdf will returns Response object
                 return $this->get('io_tcpdf')->quick_pdf($html);
+
+                // OR
+                return $this->get('io_tcpdf')->quick_pdf($html, "html.pdf", "S", array(
+                  'logo'     => 'logo.png',
+                  'title'    => 'Document title',
+                  'subtitle' => 'Subtitle'
+                ));
             }
         }
 
