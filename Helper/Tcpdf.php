@@ -1,14 +1,15 @@
 <?php
+
 /**
-* TCPDF Bridge 
-*
-* @author ioalessio
-*/
+ * TCPDF Bridge
+ *
+ * @author ioalessio
+ */
 namespace Io\TcpdfBundle\Helper;
 use Symfony\Component\HttpFoundation\Response;
 
-class Tcpdf extends \TCPDF{
-
+class Tcpdf extends \TCPDF
+{
     public function init()
     {
         // set document information
@@ -53,13 +54,19 @@ class Tcpdf extends \TCPDF{
         // Add a page
         // This method has several options, check the source code documentation for more information.
         $this->AddPage();
-
     }
+
     /**
+     * Generate a PDF
+     *
+     * @param string $html
+     * @param string $filename
+     *
+     * @return Response
      */
     public function quick_pdf($html, $file = "html.pdf", $format = "S")
     {
-      $this->init();
+        $this->init();
 
         // Close and output PDF document
         // This method has several options, check the source code documentation for more information.
@@ -67,7 +74,7 @@ class Tcpdf extends \TCPDF{
 
         $response =  new Response($this->Output($file, $format));
         $response->headers->set('Content-Type', 'application/pdf');
-        return $response;
 
+        return $response;
     }
 }
