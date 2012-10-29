@@ -15,46 +15,38 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
  */
 class IoTcpdfExtension extends Extension
 {
-
     /**
      * {@inheritDoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
         // this line is the key
         $this->bindParameter($container, 'io_tcpdf', $config);
 
-
 //        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
 
-     /**
+    /**
      * Set the given parameters to the given container
+     *
      * @param ContainerBuilder $container
-     * @param string $name
-     * @param mixed $value
+     * @param string           $name
+     * @param mixed            $value
      */
     private function bindParameter(ContainerBuilder $container, $name, $value)
     {
-        if( is_array($value) )
-        {
-
-            foreach( $value as $index => $val )
-            {
-                $this->bindParameter($container, $name.'.'.$index, $val);
+        if (is_array($value)) {
+            foreach ($value as $index => $val) {
+                $this->bindParameter($container, $name . '.' . $index, $val);
             }
             $container->setParameter($name, $value);
-        }
-        else
-        {
+        } else {
             $container->setParameter($name, $value);
         }
     }
-
 }
